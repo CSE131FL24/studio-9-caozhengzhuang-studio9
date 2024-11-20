@@ -11,6 +11,8 @@ public class Polynomial {
 	 */
 	public Polynomial() {
 		//FIXME
+		this.list = new LinkedList<Double> ();
+		
 	}
 
 	
@@ -20,7 +22,7 @@ public class Polynomial {
 	 * @return polynomial with added term
 	 */
 	public void addTerm(double coeff) {
-		//FIXME
+		this.list.add(coeff);		
 	}
 	
 	/*
@@ -29,7 +31,13 @@ public class Polynomial {
 	 * Cx^N + Cx^N-1 + ... + Cx + C
 	 */
 	public String toString() {
-		return ""; //FIXME
+		String result = "";
+		for (int i = 0; i < this.list.size(); i++) {
+			int n = this.list.size() - 1 - i; 
+			result += this.list.get(i) + "X^" + n; 
+		}
+		
+		return result; //FIXME
 	}
 	
 	/**
@@ -38,12 +46,22 @@ public class Polynomial {
 	 * @return value of polynomial at that x
 	 */
 	public double evaluate(double x) {
-		return 0;//FIXME
+		int sum = 0;
+		for (int i = 0; i < this.list.size(); i++) {
+			int n = this.list.size() - 1 - i; 
+			sum += this.list.get(i) * Math.pow(x, n); 
+		}
+		return sum;//FIXME
 	}
 
 	
 	public Polynomial derivative() {
-		return null;//FIXME
+		Polynomial derivative = new Polynomial();
+		for (int i = 0; i < this.list.size(); i--) {
+			int n = this.list.size() - 1 - i; 
+			derivative.addTerm(this.list.get(i) * n); 
+		}
+		return derivative;
 	}
 	
 
